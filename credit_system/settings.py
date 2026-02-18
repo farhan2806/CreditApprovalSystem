@@ -4,6 +4,10 @@ Django settings for credit_system project.
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+password = os.getenv("DB_PASSWORD")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -58,7 +62,7 @@ WSGI_APPLICATION = 'credit_system.wsgi.application'
 
 # Database
 # DATABASE_URL = os.environ.get('DATABASE_URL', 'postgresql://credit_user:credit_pass@localhost:5432/credit_db')
-DATABASE_URL = os.environ.get('DATABASE_URL', 'postgresql://postgres:password123@localhost:5432/credit_db')
+DATABASE_URL = os.environ.get('DATABASE_URL', f'postgresql://postgres:{password}@localhost:5432/credit_db')
 
 import re
 db_match = re.match(r'postgresql://(.+):(.+)@(.+):(\d+)/(.+)', DATABASE_URL)
